@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TodoList from "./component/TodoList";
 import Form from "./component/Form";
 import TodoItemList from "./component/TodoItemList";
+import Counter from "./component/Counter";
 
 class App extends Component {
 
@@ -152,6 +153,7 @@ class App extends Component {
             )}>
               <TodoItemList todos={todos} onToggle={handleToggle} onRemove = {handleRemove}/>
           </TodoList>
+            <Counter/>
         </div>
     );
   }

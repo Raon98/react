@@ -47,6 +47,7 @@
         ex) shouldComponentUpdate(nextProps, nextState){
             console.log("shouldComponentUpdate: " + JSON.stringify(nextProps) + " " + JSON.stringify(nextState));
             return nextProps.id !== this.props.id; // 비교 반환 연산
+            }
     7. ComponentWillUpdate
         - Component가 Update되기전에 실행
         - this.setState() 금지 ->무한 루프에 빠짐
@@ -54,6 +55,13 @@
         - Component가 Rerendering을 마친 후 실행
     9. ComponentWillUnmount
         - Component가 DOM에서 사라진 후 실행되는 Method
+ */
+/**
+  @메모3 : React 기초정리
+    React는 Props 와 State로 나뉜다.
 
-}
+    defaultProps : props가 실수로 빠졌을경우 기본값을 설정
+    static defaultprops = { name : '기본이름 ' }
+
+
  */
