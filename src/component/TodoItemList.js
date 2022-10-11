@@ -14,12 +14,31 @@ import TodoItem from "./TodoItem";
 class TodoItemList extends Component {
     render() {
         const {todos, onToggle, onRemove} =this.props;
-        
+
+        /**
+         6. 원래는 const todoList = todos.map(todo => ...) 의 형태여야 하지만,
+            함수의 파라미터 부분에서 비구조화 할당을 하여 객체 내부의 값들을 따로 레퍼런스를 만들어주었습니다.
+
+         비구조화 할당 : 배열이나 객체의 속성 값을 해체하여 그 값을 변수에 각각 담아 사용하는 자바스크립트 표현식
+            ex) const arr[a1 , a2, a3 ] = [b1 , b2, b3 ]
+             print(a1) = 'b1'
+         */
+
+        const todoList =todos.map(({id, text, checked})=>
+        <TodoItem
+            id ={id}
+            text = {text}
+            checked = {checked}
+            onToggle = {onToggle}
+            onRemove = {onRemove}
+            key = {id}
+        >
+
+        </TodoItem>
+    )
         return (
             <div>
-                <TodoItem text="안녕"/>
-                <TodoItem text="REACT"/>
-                <TodoItem text="재밌다"/>
+                {todoList}
             </div>
         );
     }

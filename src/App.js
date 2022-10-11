@@ -51,7 +51,7 @@ class App extends Component {
     }
 
   render() {
-    const {input} =this.state;
+    const {input, todos} =this.state;
     const {handleChange,
            handleCreate,
            handleKeyPress
@@ -67,7 +67,7 @@ class App extends Component {
                 >
             </Form>
             )}>
-              <TodoItemList/>
+              <TodoItemList todos={todos}/>
           </TodoList>
         </div>
     );
