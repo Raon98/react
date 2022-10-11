@@ -1,5 +1,5 @@
 /**
- @ REACT 컴포넌트 정리
+ @ 메모1 : REACT 컴포넌트 정리
  Presentational Component  = Dumb Component
  오직 뷰 만 담당하는 컴포넌트!
    1. DOM Element / style / Dumb 컴포넌트 / Smart 컴포넌트를 가지고 있을 수도 있다.
@@ -15,4 +15,45 @@
 
  UI쪽과 DATA 부분이 분리되어있어서 유지보수 및 재사용률도 높여줌
 
+ */
+
+/**
+ @ 메모2 : Component LifeCycle
+    1. 생성
+        constructor -> componentWillMount -> render -> componentDidMount
+    2. 제거
+        componentWillmount
+    3. component의 prop 변경
+        componentWIllReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate
+    4. State가 변경
+        shouldComponentUpdate -> componentWillUpdate -> render -> componentDidUpdate
+
+    1. constructor
+        - 생성자 메소드로서 컴포넌트가 처음 만들어질 때 생성
+        - 이 Method에서 기본 state를 정할 수 있습니다.
+    2. componentWIllMount
+        - Component가 DOM위에 만들어지기 전에 실행됩니다.
+    3. render
+        - Component Rendering을 담당
+    4. componentDidMount
+        - Component가 만들어지고 첫 rendering을 다 마친후 실행되는 메소드
+        - 이 안에서 다른 JavaScript Framework를 연동하거나, setTimeout.setInterval 및 AJAX 등 처리
+    5. componentWillReceiverProps
+        - Component가 prop을 새로 받았을때 실행
+        - propdp 따라 state를 업데이트해야 할 떄 사용하면 유용
+        - 이안에서 this.setState()를 실행해도 추가적으로 Rendering 하지 않음
+    6. shouldComponentUpdate
+        - props혹은 state가 변경되었을 떄, ReRendering을 하지 말지 정하는 Method
+        ex) shouldComponentUpdate(nextProps, nextState){
+            console.log("shouldComponentUpdate: " + JSON.stringify(nextProps) + " " + JSON.stringify(nextState));
+            return nextProps.id !== this.props.id; // 비교 반환 연산
+    7. ComponentWillUpdate
+        - Component가 Update되기전에 실행
+        - this.setState() 금지 ->무한 루프에 빠짐
+    8. ComponentDidUpdate
+        - Component가 Rerendering을 마친 후 실행
+    9. ComponentWillUnmount
+        - Component가 DOM에서 사라진 후 실행되는 Method
+
+}
  */
