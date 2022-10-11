@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import './TodoItem.css'
 import classnames from "classnames";
 
-/** 4. TodoItem 만들기
+/**
+ * @ 4. TodoItem 만들기
  - 체크 값이 활성화되어있으면 우측에 체크박스
  - 마우스가 위에 있을때는 엑스마크
  - 컴포넌트 영역이 클릭되면 체크박스가 활성화되며 중간글이 그어지고, 좌측의 엑스가 클릭되며 삭제

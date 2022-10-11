@@ -1,4 +1,5 @@
 /**
+ @ REACT 컴포넌트 정리
  Presentational Component  = Dumb Component
  오직 뷰 만 담당하는 컴포넌트!
    1. DOM Element / style / Dumb 컴포넌트 / Smart 컴포넌트를 가지고 있을 수도 있다.
@@ -13,6 +14,5 @@
    3. 상태를 가지고 있을 떄가 많으며, 리덕스에 직접적으로 접근 할 수 있습니다.
 
  UI쪽과 DATA 부분이 분리되어있어서 유지보수 및 재사용률도 높여줌
-
 
  */

@@ -1,7 +1,8 @@
 import React from 'react';
 import './Form.css';
 
-/**2. 컴포넌트 FROM 만들기
+/**
+ * @ 2. 컴포넌트 FROM 만들기
  컴포넌트 생김새 정리
  1. 컴포넌트 DOM 태그 작성
  2. CSS 스타일 작성

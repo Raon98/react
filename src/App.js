@@ -17,7 +17,7 @@ class App extends Component {
     }
 
     /**
-     5. Form 기능 구현하기
+     @ 5. Form 기능 구현하기
      1. 텍스트 내용 바뀌면 state UPDATE
      2. 버튼이 클릭되면 새로운 todo 생성 후 todos UPDATE
      3. Input에서 Enter 누르면 버튼을 누른것과 동일하게 작업진행
@@ -51,7 +51,7 @@ class App extends Component {
     }
 
     /**
-     7. 배열 업데이트
+     @ 7. 배열 업데이트
      REACT 배열 유의사항
      PUSH 사용 금지
      - 데이터가 추가되긴 하지만 나중에 최적화할 때, 배열을 비교하여 리렌더링을 방지하게 되는데, PUSH시 최적화 불가
@@ -96,7 +96,7 @@ class App extends Component {
     }
 
     /**
-     * @ handleToggle 또다른 방법
+     * @ 7-1handleToggle 또다른 방법
      *   handleToggle = (id) => {
      *     const { todos } = this.state;
      *     const index = todos.findIndex(todo => todo.id === id);
@@ -117,14 +117,26 @@ class App extends Component {
      *
      */
 
+    /** @8. 배열 삭제
+     파라미터로 받아온 ID 값을 갖고있지 않는 배열을 새로 생성
+     => 우리가 지정한 ID값을 배제한 새로운배열 탄생
+     */
 
+    handleRemove = (id) => {
+        const {todos} = this.state
+        this.setState({
+            todos: todos.filter(todo=> todo.id !== id)
+            }
+        )
 
+    }
   render() {
     const {input, todos} =this.state;
     const {handleChange,
            handleCreate,
            handleKeyPress,
-            handleToggle
+            handleToggle,
+            handleRemove
     } = this;
 
     return (
@@ -134,10 +146,11 @@ class App extends Component {
                 onKeyPress={handleKeyPress}
                 onChange={handleChange}
                 onCreate={handleCreate}
+                onRemove ={handleRemove}
                 >
             </Form>
             )}>
-              <TodoItemList todos={todos} onToggle={handleToggle}/>
+              <TodoItemList todos={todos} onToggle={handleToggle} onRemove = {handleRemove}/>
           </TodoList>
         </div>
     );
