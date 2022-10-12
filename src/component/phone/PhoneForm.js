@@ -23,13 +23,25 @@ class PhoneForm extends Component {
             [e.target.name]: e.target.value
         });
     }
+    handleSubmit = (e) => {
+       const {onCreate} =this.props
+        //페이지 리로딩 방지
+        e.preventDefault()
+        // 상태값을 onCreate를 통하여 부모에게 전달
+        onCreate(this.state)
+        // 상태초기화
+        this.setState({
+            name : '',
+            phone : ''
+        })
 
+    }
     render() {
         const {name, phone} = this.state
 
-        const {handleChange} = this
+        const {handleChange , handleSubmit} = this
         return (
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     placeholder="이름"
                     value={name}
@@ -44,9 +56,10 @@ class PhoneForm extends Component {
                     name="phone"
                 >
                 </input>
-                <div>이름 : {name}</div>
-                <p></p>
-                <div>전화번호 : {phone}</div>
+                {/*<div>이름 : {name}</div>*/}
+                {/*<p></p>*/}
+                {/*<div>전화번호 : {phone}</div>*/}
+                <button type="submit">등록</button>
             </form>
         )
     }
