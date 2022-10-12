@@ -5,7 +5,6 @@ class Counter extends Component {
         number : 0
     }
 
-
     handleIncrease = () => {
         const { number } = this.state;
         this.setState({
