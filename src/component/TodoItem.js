@@ -24,6 +24,12 @@ import classnames from "classnames";
  */
 
 class TodoItem extends Component {
+
+    //Checked값이 변경될 떄만 변경되도록 LifeCycle 변경 참조: 메모2
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return this.props.checked !== nextProps.checked
+    }
+
     render() {
         const {text, checked, id, onToggle, onRemove} = this.props
 
