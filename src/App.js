@@ -12,9 +12,6 @@ class App extends Component {
     state = {
         input : '',
         todos : [
-            {id : 0, text: '리엑트 소개',checked: false},
-            {id : 1, text: '리엑트 소개',checked: true},
-            {id : 2, text: '리엑트 소개',checked: false}
         ]
     }
 
@@ -67,34 +64,27 @@ class App extends Component {
 
         //1. 파라미터로 받은 ID를 가지고 몇번째 아이템인지 찾음
         const index =todos.findIndex((todo)=> todo.id === id)
-        console.log("===============================")
+        console.log("[======================================================================]")
         console.log("[ 1. index 값 확인 : " + index+ "]" )
-        console.log("===============================")
+
         //2. 선택된 객체
         const selected = todos[index]
-        console.log("===============================")
         console.log("[ 2. selected 값 확인 : " + JSON.stringify(selected)+ "]" )
-        console.log("===============================")
         //3. 배열을 복사
         const nextTodos = [...todos]
-        console.log("===============================")
         console.log("[ 3. nextTodos 값 확인 : " + JSON.stringify(nextTodos) + "]")
-        console.log("===============================")
         //4. 기존의 값들을 복사하고, checked 값을 덮어쓰기
         nextTodos[index] = {
             ...selected,
             checked : !selected.checked
         };
-        console.log("===============================")
         console.log("[ 4. nextTodos[index] 값 확인 : " + JSON.stringify(nextTodos[index])+ "]" )
-        console.log("===============================")
 
         this.setState({
             todos: nextTodos
         });
-        console.log("===============================")
         console.log("[ 5. nextTodos 값 확인 : " + JSON.stringify(nextTodos)+ "]" )
-        console.log("===============================")
+        console.log("[======================================================================]")
     }
 
     /**
@@ -130,7 +120,9 @@ class App extends Component {
             todos: todos.filter(todo=> todo.id !== id)
             }
         )
-
+    }
+    hdCreate = (data) => {
+        console.log(data)
     }
   render() {
     const {input, todos} =this.state;
@@ -138,7 +130,8 @@ class App extends Component {
            handleCreate,
            handleKeyPress,
             handleToggle,
-            handleRemove
+            handleRemove,
+            hdCreate
     } = this;
 
     return (
@@ -155,7 +148,7 @@ class App extends Component {
               <TodoItemList todos={todos} onToggle={handleToggle} onRemove = {handleRemove}/>
           </TodoList>
             <Counter/>
-            <PhoneForm/>
+            <PhoneForm onCreate={hdCreate}></PhoneForm>
         </div>
     );
   }
