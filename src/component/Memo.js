@@ -63,5 +63,11 @@
     defaultProps : props가 실수로 빠졌을경우 기본값을 설정
     static defaultprops = { name : '기본이름 ' }
 
-
+    React 배열
+    - React에서 state 내부의 값을 직접적으로 수정하면 절대로 안됨
+    push, splice, unshift, pop 같은 내장함수는 배열 자체를 직접 수정하게 되므로 사용 X
+    concat, slice, map, filter 같은 함수를 사용 O
+    [불변성의 법칙]
+    *중요 : 불변성을 유지해야, React에서 모든것들이 필요한 상황에 ReRandering 되도록 설계할 수 있고
+ *         그렇게 해야 나중에 최적화 할 수 있다.
  */

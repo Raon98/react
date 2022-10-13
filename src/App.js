@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import TodoList from "./component/TodoList";
 import Form from "./component/Form";
 import TodoItemList from "./component/TodoItemList";
@@ -6,12 +6,11 @@ import Counter from "./component/Counter";
 import PhoneForm from "./component/phone/PhoneForm";
 
 class App extends Component {
-
-    id = 3
-
+    id = 2
+    num = 0
     state = {
-        input : '',
-        todos : [
+        todos: [],
+        information: [
         ]
     }
 
@@ -37,15 +36,15 @@ class App extends Component {
             input: '', //인풋 초기화
             todos: todos.concat({
                 id: this.id++,
-                text : input,
-                checked : false
+                text: input,
+                checked: false
             })
         })
     }
-    handleKeyPress =(e) => {
+    handleKeyPress = (e) => {
         //Enter Key 눌렀을시
-        if(e.key === 'Enter'){
-        this.handleCreate()
+        if (e.key === 'Enter') {
+            this.handleCreate()
         }
     }
 
@@ -60,30 +59,30 @@ class App extends Component {
      */
 
     handleToggle = (id) => {
-        const { todos } = this.state;
+        const {todos} = this.state;
 
         //1. 파라미터로 받은 ID를 가지고 몇번째 아이템인지 찾음
-        const index =todos.findIndex((todo)=> todo.id === id)
+        const index = todos.findIndex((todo) => todo.id === id)
         console.log("[======================================================================]")
-        console.log("[ 1. index 값 확인 : " + index+ "]" )
+        console.log("[ 1. index 값 확인 : " + index + "]")
 
         //2. 선택된 객체
         const selected = todos[index]
-        console.log("[ 2. selected 값 확인 : " + JSON.stringify(selected)+ "]" )
+        console.log("[ 2. selected 값 확인 : " + JSON.stringify(selected) + "]")
         //3. 배열을 복사
         const nextTodos = [...todos]
         console.log("[ 3. nextTodos 값 확인 : " + JSON.stringify(nextTodos) + "]")
         //4. 기존의 값들을 복사하고, checked 값을 덮어쓰기
         nextTodos[index] = {
             ...selected,
-            checked : !selected.checked
+            checked: !selected.checked
         };
-        console.log("[ 4. nextTodos[index] 값 확인 : " + JSON.stringify(nextTodos[index])+ "]" )
+        console.log("[ 4. nextTodos[index] 값 확인 : " + JSON.stringify(nextTodos[index]) + "]")
 
         this.setState({
             todos: nextTodos
         });
-        console.log("[ 5. nextTodos 값 확인 : " + JSON.stringify(nextTodos)+ "]" )
+        console.log("[ 5. nextTodos 값 확인 : " + JSON.stringify(nextTodos) + "]")
         console.log("[======================================================================]")
     }
 
@@ -117,41 +116,53 @@ class App extends Component {
     handleRemove = (id) => {
         const {todos} = this.state
         this.setState({
-            todos: todos.filter(todo=> todo.id !== id)
+                todos: todos.filter(todo => todo.id !== id)
             }
         )
     }
+
     hdCreate = (data) => {
+        /** @10. 데이터 추가 */
+        const { information } = this.state;
         console.log(data)
+        this.setState({
+            information: information.concat({ num : this.num++ , ...data})
+        })
+
     }
-  render() {
-    const {input, todos} =this.state;
-    const {handleChange,
-           handleCreate,
-           handleKeyPress,
+
+
+    render() {
+        const {input, todos, information} = this.state;
+        const {
+            handleChange,
+            handleCreate,
+            handleKeyPress,
             handleToggle,
             handleRemove,
-            hdCreate
-    } = this;
+            hdCreate,
+        } = this;
 
-    return (
-        <div>
-            <TodoList from={(<Form
-                value={input}
-                onKeyPress={handleKeyPress}
-                onChange={handleChange}
-                onCreate={handleCreate}
-                onRemove ={handleRemove}
-                >
-            </Form>
-            )}>
-              <TodoItemList todos={todos} onToggle={handleToggle} onRemove = {handleRemove}/>
-          </TodoList>
-            <Counter/>
-            <PhoneForm onCreate={hdCreate}></PhoneForm>
-        </div>
-    );
-  }
+        return (
+            <div>
+                <TodoList from={(<Form
+                        value={input}
+                        onKeyPress={handleKeyPress}
+                        onChange={handleChange}
+                        onCreate={handleCreate}
+                        onRemove={handleRemove}
+                    >
+                    </Form>
+                )}>
+                    <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
+                </TodoList>
+                <Counter/>
+                <PhoneForm onCreate={hdCreate}/>
+
+                {JSON.stringify(information)}
+            </div>
+        );
+    }
 }
 
 export default App;
