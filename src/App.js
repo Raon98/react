@@ -4,6 +4,7 @@ import Form from "./component/Form";
 import TodoItemList from "./component/TodoItemList";
 import Counter from "./component/Counter";
 import PhoneForm from "./component/phone/PhoneForm";
+import PhoneInfoList from "./component/phone/PhoneInfoList";
 
 class App extends Component {
     id = 2
@@ -158,8 +159,7 @@ class App extends Component {
                 </TodoList>
                 <Counter/>
                 <PhoneForm onCreate={hdCreate}/>
-
-                {JSON.stringify(information)}
+                <PhoneInfoList data={information}/>
             </div>
         );
     }

@@ -8,21 +8,21 @@ class PhoneInfo extends Component {
     static defaultProps = {
         info: {
             name: '이름',
-            phone: '010-1234-1234',
+            phone: '010-0000-0000',
             id: 0
         }
     }
 
     render() {
         const style = {
-            border: 'ipx soild black',
+            border: '1px solid black',
             padding: '8px',
             margin: '8px'
         };
 
         const {
             name, phone, id
-        } = this.props.info
+        } = this.props.info;
 
         return (
             <div style={style}>
@@ -32,4 +32,5 @@ class PhoneInfo extends Component {
         );
     }
 }
-export default PhoneInfo
+
+export default PhoneInfo;
