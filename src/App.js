@@ -124,13 +124,19 @@ class App extends Component {
 
     hdCreate = (data) => {
         /** @10. 데이터 추가 */
-        const { information } = this.state;
+        const {information} = this.state;
         console.log(data)
         this.setState({
-            information: information.concat({ num : this.num++ , ...data})
+            information: information.concat({num: this.num++, ...data})
         })
-
     }
+    hdRemove = (id) => {
+            this.state({
+                information: information.filter(info => info.id !== id)
+            })
+    }
+
+
 
 
     render() {
@@ -142,6 +148,7 @@ class App extends Component {
             handleToggle,
             handleRemove,
             hdCreate,
+            hdRemove
         } = this;
 
         return (
@@ -159,7 +166,7 @@ class App extends Component {
                 </TodoList>
                 <Counter/>
                 <PhoneForm onCreate={hdCreate}/>
-                <PhoneInfoList data={information}/>
+                <PhoneInfoList data={information} onRemove={hdRemove}/>
             </div>
         );
     }
