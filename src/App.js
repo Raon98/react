@@ -130,11 +130,13 @@ class App extends Component {
             information: information.concat({num: this.num++, ...data})
         })
     }
-    hdRemove = (id) => {
-            this.state({
-                information: information.filter(info => info.id !== id)
+    hdRemove = (num) => {
+            const {information} = this.state
+            this.setState({
+                information: information.filter(info => info.num !== num)
             })
     }
+
 
 
 

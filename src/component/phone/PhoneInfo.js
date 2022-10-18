@@ -9,8 +9,12 @@ class PhoneInfo extends Component {
         info: {
             name: '이름',
             phone: '010-0000-0000',
-            id: 0
+            num: 0
         }
+    }
+    hdRemove = () => {
+        const {info , onRemove} = this.props
+        onRemove(info.num)
     }
 
     render() {
@@ -20,14 +24,16 @@ class PhoneInfo extends Component {
             margin: '8px'
         };
 
+        const {hdRemove} = this
         const {
-            name, phone, id
+            name, phone
         } = this.props.info;
 
         return (
             <div style={style}>
                 <div><b>{name}</b></div>
                 <div>{phone}</div>
+                <button onClick={hdRemove}>삭제</button>
             </div>
         );
     }
