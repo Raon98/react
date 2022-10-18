@@ -3,14 +3,15 @@ import PhoneInfo from "./PhoneInfo";
 
 class PhoneInfoList extends Component{
     static defarultProps = {
-        data: []
+        list: [],
+        onRemove: () => console.warn('onRemove not defined')
     }
     render() {
         /**
          * 배열을 랜더링할시에는 꼭 KEY값을 사용해야함
          */
-        const {data} = this.props
-        const list = data.map((info,index) => (<PhoneInfo key={index} info={info}/>))
+        const {data , onRemove} = this.props
+        const list = data.map((info) => (<PhoneInfo key={info.num} info={info} onRemove={onRemove}/>))
 
         return(
             <div>
