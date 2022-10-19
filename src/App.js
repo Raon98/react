@@ -11,8 +11,7 @@ class App extends Component {
     num = 0
     state = {
         todos: [],
-        information: [
-        ]
+        information: []
     }
 
     /**
@@ -130,48 +129,58 @@ class App extends Component {
             information: information.concat({num: this.num++, ...data})
         })
     }
+    /** @11. 데이터 삭제 */
     hdRemove = (num) => {
-            const {information} = this.state
-            this.setState({
-                information: information.filter(info => info.num !== num)
-            })
+        const {information} = this.state
+        this.setState({
+            information: information.filter(info => info.num !== num)
+        })
+    }
+    /** @12. 데이터 업데이트 */
+    hdUpdate = (num, data) => {
+        const {information} = this.state
+        this.setState({
+            information: information.map(info => info.num === num ? {...info, ...data} : info)
+            //일치하면 새로운 객체 생성 : 기존 객체 사용
+        })
     }
 
 
 
 
+render()
+{
+    const {input, todos, information} = this.state;
+    const {
+        handleChange,
+        handleCreate,
+        handleKeyPress,
+        handleToggle,
+        handleRemove,
+        hdCreate,
+        hdRemove,
+        hdUpdate
+    } = this;
 
-    render() {
-        const {input, todos, information} = this.state;
-        const {
-            handleChange,
-            handleCreate,
-            handleKeyPress,
-            handleToggle,
-            handleRemove,
-            hdCreate,
-            hdRemove
-        } = this;
-
-        return (
-            <div>
-                <TodoList from={(<Form
-                        value={input}
-                        onKeyPress={handleKeyPress}
-                        onChange={handleChange}
-                        onCreate={handleCreate}
-                        onRemove={handleRemove}
-                    >
-                    </Form>
-                )}>
-                    <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
-                </TodoList>
-                <Counter/>
-                <PhoneForm onCreate={hdCreate}/>
-                <PhoneInfoList data={information} onRemove={hdRemove}/>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <TodoList from={(<Form
+                    value={input}
+                    onKeyPress={handleKeyPress}
+                    onChange={handleChange}
+                    onCreate={handleCreate}
+                    onRemove={handleRemove}
+                >
+                </Form>
+            )}>
+                <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
+            </TodoList>
+            <Counter/>
+            <PhoneForm onCreate={hdCreate}/>
+            <PhoneInfoList data={information} onRemove={hdRemove} onUpdate={hdUpdate}/>
+        </div>
+    );
+}
 }
 
 export default App;
