@@ -22,6 +22,8 @@ class PhoneInfo extends Component {
         name: '',
         phone: ''
     }
+    // editing 값을 반전시키는 함수
+    // true -> false, false -> true
     hdToggleEdit = () => {
         const { editing} = this.state
         this.setState({
@@ -29,9 +31,28 @@ class PhoneInfo extends Component {
         })
     }
 
-    hdUpdate = () => {
+    /** @ 12 데이터 업데이트
+     * 수정을 눌렀을땐, 기존의 값이 input에 나타나고,수정을 적용할땐, input 의 값들을 부모한테 전달해줍니다.
+     */
+
+    componentDidUpdate(prevProps, prevState) {
         const {info, onUpdate} = this.props
-        onUpdate(info.num)
+
+        // editing 값이 false -> true 로 전환 될 때
+        // info 의 값을 state 에 넣어준다
+        if(!prevProps.editing && this.state.editing){
+            this.setState({
+                name : info.name,
+                phone : info.phone
+            })
+        }
+        if (prevState.editing && !this.state.editing) {
+            // editing 값이 true -> false 로 전환 될 때
+            onUpdate(info.num, {
+                name: this.state.name,
+                phone: this.state.phone
+            })
+        }
     }
 
     /**
@@ -48,8 +69,34 @@ class PhoneInfo extends Component {
             padding: '8px',
             margin: '8px'
         };
-
+        const {editing} = this.state
+        //수정모드
+        if(editing){
+            return (
+                <div style={style}>
+                    <div>
+                        <input
+                            value={this.state.name}
+                            name="name"
+                            placeholder="이름"
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            value={this.state.phone}
+                            name="phone"
+                            placeholder="전화번호"
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <button onClick={this.handleToggleEdit}>적용</button>
+                    <button onClick={this.handleRemove}>삭제</button>
+                </div>
+            )
+        }
         const {hdRemove} = this
+        //일반모드
         const {
             name, phone
         } = this.props.info;
