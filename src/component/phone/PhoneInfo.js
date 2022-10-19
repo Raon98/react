@@ -25,10 +25,8 @@ class PhoneInfo extends Component {
     // editing 값을 반전시키는 함수
     // true -> false, false -> true
     hdToggleEdit = () => {
-        const { editing} = this.state
-        this.setState({
-            editing: !editing
-        })
+        const {editing} = this.state
+        this.setState({ editing: !editing })
     }
 
     /** @ 12 데이터 업데이트
@@ -40,10 +38,10 @@ class PhoneInfo extends Component {
 
         // editing 값이 false -> true 로 전환 될 때
         // info 의 값을 state 에 넣어준다
-        if(!prevProps.editing && this.state.editing){
+        if (!prevState.editing && this.state.editing) {
             this.setState({
-                name : info.name,
-                phone : info.phone
+                name: info.name,
+                phone: info.phone
             })
         }
         if (prevState.editing && !this.state.editing) {
@@ -53,6 +51,14 @@ class PhoneInfo extends Component {
                 phone: this.state.phone
             })
         }
+    }
+
+    // input 에서 onChange 이벤트가 발생 될 때 호출되는 함수
+    hdChange = (e) => {
+        const {name, value} = e.target;
+        this.setState({
+            [name]: value
+        });
     }
 
     /**
@@ -69,9 +75,10 @@ class PhoneInfo extends Component {
             padding: '8px',
             margin: '8px'
         };
+        const {hdRemove, hdToggleEdit, hdChange} = this
         const {editing} = this.state
         //수정모드
-        if(editing){
+        if (editing) {
             return (
                 <div style={style}>
                     <div>
@@ -79,7 +86,7 @@ class PhoneInfo extends Component {
                             value={this.state.name}
                             name="name"
                             placeholder="이름"
-                            onChange={this.handleChange}
+                            onChange={hdChange}
                         />
                     </div>
                     <div>
@@ -87,15 +94,15 @@ class PhoneInfo extends Component {
                             value={this.state.phone}
                             name="phone"
                             placeholder="전화번호"
-                            onChange={this.handleChange}
+                            onChange={hdChange}
                         />
                     </div>
-                    <button onClick={this.handleToggleEdit}>적용</button>
-                    <button onClick={this.handleRemove}>삭제</button>
+                    <button onClick={hdToggleEdit}>적용</button>
+                    <button onClick={hdRemove}>삭제</button>
                 </div>
             )
         }
-        const {hdRemove} = this
+
         //일반모드
         const {
             name, phone
@@ -105,6 +112,7 @@ class PhoneInfo extends Component {
             <div style={style}>
                 <div><b>{name}</b></div>
                 <div>{phone}</div>
+                <button onClick={hdToggleEdit}>수정</button>
                 <button onClick={hdRemove}>삭제</button>
             </div>
         );
