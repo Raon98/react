@@ -12,8 +12,33 @@ class PhoneInfo extends Component {
             num: 0
         }
     }
+    /**
+     * @12 데이터 업데이트
+     * 수정 버튼을 눌렀을 떄 editing 값을 true 로 설정
+     *  이 값이 true 일 때에는, 기존에 텍스트 형태로 보여주던 값들을 input 형태로 보여주게 됩니다.
+     */
+    state = {
+        editing: false,
+        name: '',
+        phone: ''
+    }
+    hdToggleEdit = () => {
+        const { editing} = this.state
+        this.setState({
+            editing: !editing
+        })
+    }
+
+    hdUpdate = () => {
+        const {info, onUpdate} = this.props
+        onUpdate(info.num)
+    }
+
+    /**
+     * @11 데이터 삭제
+     */
     hdRemove = () => {
-        const {info , onRemove} = this.props
+        const {info, onRemove} = this.props
         onRemove(info.num)
     }
 
