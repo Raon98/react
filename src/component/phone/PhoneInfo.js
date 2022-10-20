@@ -13,6 +13,20 @@ class PhoneInfo extends Component {
         }
     }
     /**
+     * @13 데이터 최적화
+     */
+    shouldComponentUpdate(nextProps, nextState) {
+        // 수정 상태가 아니고, info 값이 같다면 리렌더링 안함
+        if (!this.state.editing
+            && !nextState.editing
+            && nextProps.info === this.props.info) {
+            return false;
+        }
+        // 나머지 경우엔 리렌더링함
+        return true;
+    }
+
+    /**
      * @12 데이터 업데이트
      * 수정 버튼을 눌렀을 떄 editing 값을 true 로 설정
      *  이 값이 true 일 때에는, 기존에 텍스트 형태로 보여주던 값들을 input 형태로 보여주게 됩니다.
