@@ -11,7 +11,8 @@ class App extends Component {
     num = 0
     state = {
         todos: [],
-        information: []
+        information: [],
+        keyword : ''
     }
 
     /**
@@ -144,13 +145,19 @@ class App extends Component {
             //일치하면 새로운 객체 생성 : 기존 객체 사용
         })
     }
-
+    /** @13. 데이터 필터링 궇현 */
+    hdChange = (e) => {
+        this.setState({
+            keyword: e.target.value,
+        });
+    }
 
 
 
 render()
 {
-    const {input, todos, information} = this.state;
+    const {input, todos, information,keyword} = this.state;
+    const filteredList = information.filter(info => info.name.indexOf(keyword) !== -1); //해당값이 없으면 표시 x
     const {
         handleChange,
         handleCreate,
@@ -159,7 +166,8 @@ render()
         handleRemove,
         hdCreate,
         hdRemove,
-        hdUpdate
+        hdUpdate,
+        hdChange
     } = this;
 
     return (
@@ -177,7 +185,14 @@ render()
             </TodoList>
             <Counter/>
             <PhoneForm onCreate={hdCreate}/>
-            <PhoneInfoList data={information} onRemove={hdRemove} onUpdate={hdUpdate}/>
+            <p>
+                <input
+                    placeholder="검색 할 이름을 입력하세요.."
+                    onChange={hdChange}
+                    value={keyword}
+                />
+            </p>
+            <PhoneInfoList data={filteredList} onRemove={hdRemove} onUpdate={hdUpdate}/>
         </div>
     );
 }
