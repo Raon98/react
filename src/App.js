@@ -11,7 +11,8 @@ class App extends Component {
     num = 0
     state = {
         todos: [],
-        information: []
+        information: [],
+        keyword : ''
     }
 
     /**
@@ -150,7 +151,7 @@ class App extends Component {
 
 render()
 {
-    const {input, todos, information} = this.state;
+    const {input, todos, information,keyword} = this.state;
     const {
         handleChange,
         handleCreate,
@@ -177,6 +178,13 @@ render()
             </TodoList>
             <Counter/>
             <PhoneForm onCreate={hdCreate}/>
+            <p>
+                <input
+                    placeholder="검색 할 이름을 입력하세요.."
+                    onChange={this.handleChange}
+                    value={keyword}
+                />
+            </p>
             <PhoneInfoList data={information} onRemove={hdRemove} onUpdate={hdUpdate}/>
         </div>
     );
