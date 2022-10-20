@@ -157,6 +157,7 @@ class App extends Component {
 render()
 {
     const {input, todos, information,keyword} = this.state;
+    const filteredList = information.filter(info => info.name.indexOf(keyword) !== -1); //해당값이 없으면 표시 x
     const {
         handleChange,
         handleCreate,
@@ -191,7 +192,7 @@ render()
                     value={keyword}
                 />
             </p>
-            <PhoneInfoList data={information} onRemove={hdRemove} onUpdate={hdUpdate}/>
+            <PhoneInfoList data={filteredList} onRemove={hdRemove} onUpdate={hdUpdate}/>
         </div>
     );
 }
