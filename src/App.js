@@ -145,7 +145,12 @@ class App extends Component {
             //일치하면 새로운 객체 생성 : 기존 객체 사용
         })
     }
-
+    /** @13. 데이터 필터링 궇현 */
+    hdChange = (e) => {
+        this.setState({
+            keyword: e.target.value,
+        });
+    }
 
 
 
@@ -160,7 +165,8 @@ render()
         handleRemove,
         hdCreate,
         hdRemove,
-        hdUpdate
+        hdUpdate,
+        hdChange
     } = this;
 
     return (
@@ -181,7 +187,7 @@ render()
             <p>
                 <input
                     placeholder="검색 할 이름을 입력하세요.."
-                    onChange={this.handleChange}
+                    onChange={hdChange}
                     value={keyword}
                 />
             </p>
