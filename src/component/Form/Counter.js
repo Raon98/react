@@ -24,7 +24,7 @@ class Counter extends Component {
         const {handleIncrease,handleDecrease} = this
         return (
             <div>
-                <h1>카운터</h1>
+                <h3>카운터</h3>
                 <div>값 : {this.state.number}</div>
                 <button onClick={handleIncrease}>+</button>
                 <button onClick={handleDecrease}>-</button>
