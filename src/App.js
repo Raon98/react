@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import TodoList from "./component/TodoList";
-import Form from "./component/Form";
-import TodoItemList from "./component/TodoItemList";
-import Counter from "./component/Counter";
+import TodoList from "./component/todo/TodoList";
+import Form from "./component/Form/Form";
+import TodoItemList from "./component/todo/TodoItemList";
+import Counter from "./component/Form/Counter";
 import PhoneForm from "./component/phone/PhoneForm";
 import PhoneInfoList from "./component/phone/PhoneInfoList";
 
@@ -172,6 +172,7 @@ render()
 
     return (
         <div>
+            <div>[TODOLIST]---------------------------------------------</div>
             <TodoList from={(<Form
                     value={input}
                     onKeyPress={handleKeyPress}
@@ -183,7 +184,11 @@ render()
             )}>
                 <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
             </TodoList>
+            <p></p>
+            <div>[COUNTER]---------------------------------------------</div>
             <Counter/>
+            <p></p>
+            <div>[PHONE]---------------------------------------------</div>
             <PhoneForm onCreate={hdCreate}/>
             <p>
                 <input
@@ -193,6 +198,7 @@ render()
                 />
             </p>
             <PhoneInfoList data={filteredList} onRemove={hdRemove} onUpdate={hdUpdate}/>
+            <p></p>
         </div>
     );
 }
