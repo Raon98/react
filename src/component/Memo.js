@@ -70,6 +70,31 @@
     [불변성의 법칙]
     *중요 : 불변성을 유지해야, React에서 모든것들이 필요한 상황에 ReRandering 되도록 설계할 수 있고
  *         그렇게 해야 나중에 최적화 할 수 있다.
+ *
+ *  [ UseConfim ]
+   - 이벤트를 실행하기 전에 사용자에게 확인을 받는 기능을 하는 함수
+   - 사용자가 어떤것을 저장하거나 삭제할 때 유용하게 사용
+    #실행순서
+    - Browser가 이벤트를 막고 confirm을 실행한 후, 확인을 하면 onConfire 이벤트 진행 - 취소시 onCancel 진행
+        [CODE EX]
+         const useConfirm = (message = "", onConfirm, onCancel) => { // message의 기본값은 ""
+          if (!onConfirm || typeof onConfirm !== "function") {
+            return; // 매개변수 onConfirm가 없거나 onConfirm이 함수가 아나라면 return 실행
+          }
+          if (onCancel && typeof onCancel !== "function") { // onCancle은 필수요소는 아님
+            return;
+          }
+          const confirmAction = () => { // confirm창의 응답에 따른 이벤트 실행 함수
+            if (confirm(message)) { // 확인을 눌렀다면
+              onConfirm();
+            } else { // 취소를 눌렀다면
+              onCancel();
+            }
+          };
+          return confirmAction;
+        };
+
+ *
  */
 /**
  @메모4 : React에서 DOM에 직접적인 접근을 할 때 REF!
